@@ -7,6 +7,7 @@ import http from 'http';
 import dotenv from 'dotenv';
 
 import { connect_db } from './db';
+import router from './router';
 
 const app = express();
 
@@ -27,3 +28,5 @@ server.listen(PORT, () => {
 });
 
 connect_db(process.env.MONGO_URL);
+
+app.use('/', router());
