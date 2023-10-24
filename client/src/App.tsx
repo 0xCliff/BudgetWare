@@ -1,8 +1,27 @@
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
+import Layout from './pages/Layout';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+const queryClient = new QueryClient();
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <Layout>
+        <div>Logged in</div>
+      </Layout>
+    ),
+  },
+]);
+
 function App() {
   return (
-    <div className=''>
-      <h1 className='text-red-500'>Working</h1>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
