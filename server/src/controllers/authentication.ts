@@ -24,9 +24,11 @@ export const register = async (req: Request, res: Response) => {
       authentication: {
         salt,
         password: authentication(salt, password),
+        sessionToken: authentication(salt, [username, email].join('/')),
       },
     });
 
+    res.cookie('AUTH', user.authentication.sessionToken, { domain: 'localhost', path: '/' });
     return res.status(200).json(user).end();
   } catch (error) {
     console.log(error);
@@ -42,7 +44,9 @@ export const login = async (req: Request, res: Response) => {
       return res.sendStatus(400);
     }
 
-    const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
+    const user = await getUserByEmail(email).select(
+      '+authentication.salt +authentication.password +authentication.sessionToken'
+    );
 
     if (!user) {
       return res.sendStatus(403);
@@ -53,11 +57,6 @@ export const login = async (req: Request, res: Response) => {
     if (user.authentication.password !== expectedHash) {
       return res.sendStatus(403);
     }
-
-    const salt = random();
-    user.authentication.sessionToken = authentication(salt, user._id.toString());
-
-    await user.save();
 
     res.cookie('AUTH', user.authentication.sessionToken, { domain: 'localhost', path: '/' });
     return res.status(200).json(user).end();

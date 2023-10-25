@@ -8,18 +8,20 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <Layout>
-        <div>Logged in</div>
-      </Layout>
-    ),
+    element: <div>Logged in</div>,
+  },
+  {
+    path: '/settings',
+    element: <div>Settings</div>,
   },
 ]);
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <Layout>
+        <RouterProvider router={router} />
+      </Layout>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
