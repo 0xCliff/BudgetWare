@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 import Input from './Input';
 import Button from './Button';
@@ -28,6 +29,7 @@ const AuthForm: React.FC = () => {
       username: '',
       email: '',
       password: '',
+      confirmPassword: '',
     },
   });
 
@@ -35,13 +37,25 @@ const AuthForm: React.FC = () => {
     setIsLoading(true);
 
     if (variant === 'REGISTER') {
-      await axios.post('http://localhost:8080/auth/register', data, { withCredentials: true });
-      window.location.reload();
+      await axios
+        .post('/api/v1/auth/register', data, { withCredentials: true })
+        .then(() => toast.success('Welcome.'))
+        .catch(() => toast.error('Something went wrong.'))
+        .finally(() => {
+          setIsLoading(false);
+          document.location.reload();
+        });
     }
 
     if (variant === 'LOGIN') {
-      await axios.post('http://localhost:8080/auth/login', data, { withCredentials: true });
-      window.location.reload();
+      await axios
+        .post('/api/v1/auth/login', data, { withCredentials: true })
+        .then(() => toast.success('Logged in.'))
+        .catch(() => toast.error('Invalid credentials.'))
+        .finally(() => {
+          setIsLoading(false);
+          document.location.reload();
+        });
     }
   };
 
@@ -56,6 +70,7 @@ const AuthForm: React.FC = () => {
             label='User name'
             id='username'
             register={register}
+            required
             errors={errors}
             disabled={isLoading}
           />
@@ -65,17 +80,30 @@ const AuthForm: React.FC = () => {
           id='email'
           type='email'
           register={register}
+          required
           errors={errors}
           disabled={isLoading}
         />
         <Input
           label='Password'
           id='password'
-          type='password'
           register={register}
+          required
+          type='password'
           errors={errors}
           disabled={isLoading}
         />
+        {variant === 'REGISTER' && (
+          <Input
+            label='Confirm password'
+            id='confirmPassword'
+            type='password'
+            register={register}
+            required
+            errors={errors}
+            disabled={isLoading}
+          />
+        )}
         <div>
           <Button
             disabled={isLoading}

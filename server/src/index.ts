@@ -5,6 +5,7 @@ import compression from 'compression';
 import cors from 'cors';
 import http from 'http';
 import dotenv from 'dotenv';
+import path from 'path';
 
 import { connect_db } from './db';
 import router from './router';
@@ -12,6 +13,8 @@ import router from './router';
 const app = express();
 
 dotenv.config();
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(
   cors({
     credentials: true,

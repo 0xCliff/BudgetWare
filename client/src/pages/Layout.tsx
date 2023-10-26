@@ -2,14 +2,16 @@ import { FaMoneyCheckAlt } from 'react-icons/fa';
 
 import AuthForm from '../components/AuthForm';
 import Navigation from '../components/Navigation';
+import { Toaster } from 'react-hot-toast';
 
 const Layout: React.FC<any> = ({ children }) => {
   let layout;
   if (document.cookie.includes('AUTH')) {
     layout = (
       <div className='flex flex-col lg:flex-row'>
+        <Toaster />
         <Navigation />
-        <div className='m-4 w-full min-h-full rounded shadow p-2'>{children}</div>
+        <div className='m-4 w-full min-h-full'>{children}</div>
       </div>
     );
   } else {
@@ -20,6 +22,7 @@ const Layout: React.FC<any> = ({ children }) => {
           <h1 className='text-4xl text-center'>
             Sign In To <span className='text-violet-500 font-bold'>Budget App</span>
           </h1>
+          <Toaster />
           <AuthForm />
         </div>
       </div>

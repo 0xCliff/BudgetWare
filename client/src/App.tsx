@@ -1,27 +1,35 @@
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Layout from './pages/Layout';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
+import Settings from './pages/Settings';
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>Logged in</div>,
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
   },
   {
     path: '/settings',
-    element: <div>Settings</div>,
+    element: (
+      <Layout>
+        <Settings />
+      </Layout>
+    ),
   },
 ]);
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout>
-        <RouterProvider router={router} />
-      </Layout>
+      <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

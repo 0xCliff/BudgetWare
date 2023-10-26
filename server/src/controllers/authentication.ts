@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { createUser, getUserByEmail } from '../db';
 import { authentication, random } from '../helpers';
+import cookieParser from 'cookie-parser';
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -63,5 +64,15 @@ export const login = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     return res.sendStatus(403);
+  }
+};
+
+export const signOut = (req: Request, res: Response) => {
+  try {
+    res.clearCookie('AUTH', { domain: 'localhost', path: '/' });
+    return res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
   }
 };
