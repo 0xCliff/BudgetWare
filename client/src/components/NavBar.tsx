@@ -10,7 +10,7 @@ import Button from './Button';
 
 const signOut = async () => {
   await axios
-    .post('http://localhost:8080/api/v1/auth/signout')
+    .get('/api/v1/auth/signout', { withCredentials: true })
     .then(() => toast.success('Signed out'))
     .catch(() => toast.error('Something went wrong.'));
 };

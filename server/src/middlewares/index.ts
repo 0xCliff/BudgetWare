@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { get, merge } from 'lodash';
 
-import { getUserById, getUserBySessionToken } from '../db';
+import { getUserBySessionToken } from '../db';
 
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -45,20 +45,4 @@ export const isOwner = async (req: Request, res: Response, next: NextFunction) =
     console.log(error);
     res.sendStatus(400);
   }
-};
-
-export const updateUser = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { username } = req.body;
-
-  if (!username) {
-    res.sendStatus(400);
-  }
-
-  const user = await getUserById(id);
-
-  user.username = username;
-  await user.save();
-
-  return res.status(200).json(user).end();
 };

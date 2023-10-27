@@ -1,13 +1,12 @@
 import { FaMoneyCheckAlt } from 'react-icons/fa';
 
-import AuthForm from '../components/AuthForm';
+import AuthForm from '../components/auth/AuthForm';
 import Navigation from '../components/Navigation';
 import { Toaster } from 'react-hot-toast';
 
 const Layout: React.FC<any> = ({ children }) => {
-  let layout;
   if (document.cookie.includes('AUTH')) {
-    layout = (
+    return (
       <div className='flex flex-col lg:flex-row'>
         <Toaster />
         <Navigation />
@@ -15,12 +14,12 @@ const Layout: React.FC<any> = ({ children }) => {
       </div>
     );
   } else {
-    layout = (
+    return (
       <div className='sm:w-full sm:min-h-full sm:max-w-md sm:mx-auto sm:mt-24 m-8'>
         <div className='flex flex-col space-y-6'>
-          <FaMoneyCheckAlt className='text-violet-500 mx-auto sm:h-24 sm:w-24 h-16 w-16' />
+          <FaMoneyCheckAlt className='text-violet-500 mx-auto sm:h-24 sm:w-24 h-16 w-16 animate-wiggle' />
           <h1 className='text-4xl text-center'>
-            Sign In To <span className='text-violet-500 font-bold'>Budget App</span>
+            Sign In To <span className='text-violet-500 font-bold'>BudgetWare</span>
           </h1>
           <Toaster />
           <AuthForm />
@@ -28,8 +27,6 @@ const Layout: React.FC<any> = ({ children }) => {
       </div>
     );
   }
-
-  return layout;
 };
 
 export default Layout;

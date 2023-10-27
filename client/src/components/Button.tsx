@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { AiOutlineReload } from 'react-icons/ai';
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;
@@ -36,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({
         !secondary && !danger && 'bg-violet-500 hover:bg-violet-600 focus-visible:outline-violet-600'
       )}
     >
-      {children}
+      {disabled ? <AiOutlineReload className='h-4 w-4 animate-spin' /> : children}
     </button>
   );
 };
