@@ -9,3 +9,5 @@ export const connect_db = (connectionString: string): void => {
 };
 
 export * from './actions/userActions';
+export * from './actions/transactionActions';
+export * from './actions/categoryActions';

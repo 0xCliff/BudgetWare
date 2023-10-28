@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Transaction } from './transactions';
 
 const { Schema, model } = mongoose;
 
@@ -10,6 +11,7 @@ const UserSchema = new Schema({
     salt: { type: String, select: false },
     sessionToken: { type: String, select: false },
   },
+  transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction' }],
 });
 
-export const UserModel = model('User', UserSchema);
+export const User = model('User', UserSchema);

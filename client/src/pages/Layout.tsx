@@ -10,7 +10,7 @@ const Layout: React.FC<any> = ({ children }) => {
       <div className='flex flex-col lg:flex-row'>
         <Toaster />
         <Navigation />
-        <div className='m-4 w-full min-h-full'>{children}</div>
+        <div className='p-4 w-full min-h-full'>{children}</div>
       </div>
     );
   } else {
