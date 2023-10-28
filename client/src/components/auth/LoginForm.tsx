@@ -44,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleVariant }) => {
   };
 
   return (
-    <div className='bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
+    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
       <form
         className='space-y-6'
         onSubmit={handleSubmit(onSubmit)}
@@ -83,7 +83,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleVariant }) => {
             <div className='w-full border-t border-gray-300' />
           </div>
           <div className='relative flex justify-center text-sm'>
-            <span className='bg-white px-2 text-gray-500'>New to budget-app?</span>
+            <span className='dark:bg-neutral-200 bg-white px-2 text-gray-500'>New to budget-app?</span>
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleVariant }) => {
           onClick={toggleVariant}
           className='underline cursor-pointer'
         >
-          <span className='text-violet-500'>Create an account</span>
+          <span className='text-violet-500 '>Create an account</span>
         </div>
       </div>
     </div>

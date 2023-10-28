@@ -34,7 +34,9 @@ const Button: React.FC<ButtonProps> = ({
         fullWidth && 'w-full',
         secondary ? 'text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white' : 'text-white',
         danger && 'bg-rose-500 hover:bg-rose-600 focus-visible:outline-rose-600',
-        !secondary && !danger && 'bg-violet-500 hover:bg-violet-600 focus-visible:outline-violet-600'
+        !secondary &&
+          !danger &&
+          'bg-violet-500 dark:bg-violet-400 hover:bg-violet-600 dark:hover:bg-violet-500 focus-visible:outline-violet-600 dark:focus-visible:outline-violet-500'
       )}
     >
       {disabled ? <AiOutlineReload className='h-4 w-4 animate-spin' /> : children}

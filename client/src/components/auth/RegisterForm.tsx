@@ -54,7 +54,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ toggleVariant }) => {
   };
 
   return (
-    <div className='bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
+    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
       <form
         className='space-y-6'
         onSubmit={handleSubmit(onSubmit)}
@@ -114,7 +114,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ toggleVariant }) => {
             <div className='w-full border-t border-gray-300' />
           </div>
           <div className='relative flex justify-center text-sm'>
-            <span className='bg-white px-2 text-gray-500'>Already have an account?</span>
+            <span className='dark:bg-neutral-200 bg-white px-2 text-gray-500'>Already have an account?</span>
           </div>
         </div>
       </div>
