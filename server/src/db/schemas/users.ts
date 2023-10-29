@@ -14,4 +14,10 @@ const UserSchema = new Schema({
   transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction' }],
 });
 
+UserSchema.post('findOneAndDelete', async (user) => {
+  if (user.transactions.length) {
+    await Transaction.deleteMany({ _id: { $in: user.transactions } });
+  }
+});
+
 export const User = model('User', UserSchema);

@@ -1,18 +1,7 @@
 import clsx from 'clsx';
 import { AiOutlineReload } from 'react-icons/ai';
 
-interface ButtonProps {
-  type?: 'button' | 'submit' | 'reset' | undefined;
-  fullWidth?: boolean;
-  children?: React.ReactNode;
-  onClick?: () => void;
-  secondary?: boolean;
-  danger?: boolean;
-  disabled?: boolean;
-  className?: string;
-}
-
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<Partial<ButtonProps>> = ({
   type,
   fullWidth,
   children,

@@ -1,17 +1,15 @@
 import clsx from 'clsx';
 import { FiSearch } from 'react-icons/fi';
 
-interface SearchBarProps {
-  value?: string;
-  id?: string;
-  required?: boolean;
-  disabled?: boolean;
-  classNames?: string;
-  onChange?: (e: any) => void;
-  placeholder: string;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({ value, id, required, disabled, classNames, onChange, placeholder }) => {
+const SearchBar: React.FC<Partial<SearchBarProps>> = ({
+  value,
+  id,
+  required,
+  disabled,
+  classNames,
+  onChange,
+  placeholder,
+}) => {
   return (
     <div className='flex items-center'>
       <FiSearch className='h-8 w-8 mr-2' />

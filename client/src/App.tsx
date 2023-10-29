@@ -1,28 +1,21 @@
 import { useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { TbMoon, TbMoonOff } from 'react-icons/tb';
-import axios from 'axios';
-import { useQuery } from 'react-query';
 
-import { UserContext } from './context/userContext';
 import { router } from './router';
 
-const getUser = async () => {
-  return await axios
-    .get(`/api/v1/users/${document.cookie.slice(5)}`, { withCredentials: true })
-    .then(({ data }) => data)
-    .catch((error) => console.log(error));
-};
-
 function App() {
-  const { data, isLoading } = useQuery('getUser', getUser);
   const [themeMode, setThemeMode] = useState<string>('dark');
 
   const theme =
     localStorage.theme === 'dark' ? (
-      <TbMoon className='h-6 w-6 lg:h-8 lg:w-8 text-violet-400' />
+      <div className='hover:bg-neutral-700 h-12 w-12 flex items-center justify-center rounded-full transition-colors ease-in-out duration-300'>
+        <TbMoon className='h-6 w-6 lg:h-8 lg:w-8 text-violet-400' />
+      </div>
     ) : (
-      <TbMoonOff className='h-6 w-6 lg:h-8 lg:w-8 text-violet-500' />
+      <div className='hover:bg-neutral-200 h-12 w-12 flex items-center justify-center rounded-full transition-colors ease-in-out duration-300'>
+        <TbMoonOff className='h-6 w-6 lg:h-8 lg:w-8 text-violet-500' />
+      </div>
     );
 
   if (
@@ -46,12 +39,11 @@ function App() {
 
   return (
     <div className='min-h-screen bg-neutral-100 dark:bg-zinc-800 dark:text-neutral-200 transition-all duration-300 '>
-      <UserContext.Provider value={{ data, isLoading }}>
-        <RouterProvider router={router} />
-      </UserContext.Provider>
+      <RouterProvider router={router} />
+
       <button
         onClick={() => toggleTheme()}
-        className='fixed bottom-5 right-5 lg:bottom-3 lg:left-2.5 cursor-pointer'
+        className='fixed bottom-2 right-2 lg:bottom-3 lg:left-2.5 cursor-pointer'
       >
         {theme}
       </button>

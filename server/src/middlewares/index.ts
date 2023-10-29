@@ -29,14 +29,14 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
 export const isOwner = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id } = req.params;
+    const { userId } = req.params;
     const currentUserId = get(req, 'identity._id') as string;
 
     if (!currentUserId) {
       return res.sendStatus(403);
     }
 
-    if (currentUserId.toString() !== id) {
+    if (currentUserId.toString() !== userId) {
       return res.sendStatus(403);
     }
 

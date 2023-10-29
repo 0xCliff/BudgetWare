@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -7,10 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import Button from '../Button';
 import Input from '../Input';
-
-interface RegisterFormProps {
-  toggleVariant: () => void;
-}
+import { useRegisterMutation } from '../../store';
 
 const registerSchema = z
   .object({
@@ -29,7 +25,8 @@ const registerSchema = z
 
 export type RegisterValues = z.infer<typeof registerSchema>;
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ toggleVariant }) => {
+const RegisterForm: React.FC<AuthFormProps> = ({ toggleVariant }) => {
+  const [signUp] = useRegisterMutation();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -43,20 +40,21 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ toggleVariant }) => {
   const onSubmit: SubmitHandler<RegisterValues> = async (data) => {
     setIsLoading(true);
 
-    await axios
-      .post('/api/v1/auth/register', data, { withCredentials: true })
+    signUp(data)
       .then(() => toast.success('Welcome.'))
-      .catch(() => toast.error('Something went wrong.'))
+      .catch((error) => {
+        toast.error('Something went wrong.');
+        console.log(error);
+      })
       .finally(() => {
         setIsLoading(false);
-        document.location.reload();
       });
   };
 
   return (
-    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
+    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow rounded-lg sm:px-10'>
       <form
-        className='space-y-6'
+        className='space-y-4'
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

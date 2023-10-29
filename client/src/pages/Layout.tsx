@@ -1,7 +1,7 @@
-import { FaMoneyCheckAlt } from 'react-icons/fa';
+import { SlWallet } from 'react-icons/sl';
 
 import AuthForm from '../components/auth/AuthForm';
-import Navigation from '../components/Navigation';
+import Navigation from '../components/navigation/Navigation';
 import { Toaster } from 'react-hot-toast';
 
 const Layout: React.FC<any> = ({ children }) => {
@@ -15,9 +15,9 @@ const Layout: React.FC<any> = ({ children }) => {
     );
   } else {
     return (
-      <div className='sm:w-full sm:min-h-full sm:max-w-md sm:mx-auto sm:pt-24'>
+      <div className='w-10/12 mx-auto pt-24 sm:w-full sm:min-h-full sm:max-w-md sm:mx-auto'>
         <div className='flex flex-col space-y-6'>
-          <FaMoneyCheckAlt className='text-violet-500 dark:text-violet-400 mx-auto sm:h-24 sm:w-24 h-16 w-16 animate-wiggle' />
+          <SlWallet className='text-violet-500 dark:text-violet-400 mx-auto sm:h-24 sm:w-24 h-16 w-16 animate-wiggle' />
           <h1 className='text-4xl text-center'>
             Sign In To <span className='text-violet-500 dark:text-violet-400 font-bold'>BudgetWare</span>
           </h1>

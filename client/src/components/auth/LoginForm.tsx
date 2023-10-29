@@ -1,16 +1,12 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import toast from 'react-hot-toast';
 
 import Button from '../Button';
 import Input from '../Input';
-
-interface LoginFormProps {
-  toggleVariant: () => void;
-}
+import { useLoginMutation } from '../../store';
 
 const loginSchema = z.object({
   email: z.string().min(1, { message: 'Email is required.' }).email({ message: 'Must be a valid email address' }),
@@ -19,7 +15,8 @@ const loginSchema = z.object({
 
 export type LoginValues = z.infer<typeof loginSchema>;
 
-const LoginForm: React.FC<LoginFormProps> = ({ toggleVariant }) => {
+const LoginForm: React.FC<AuthFormProps> = ({ toggleVariant }) => {
+  const [login] = useLoginMutation();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -32,21 +29,21 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleVariant }) => {
 
   const onSubmit: SubmitHandler<LoginValues> = async (data) => {
     setIsLoading(true);
-
-    await axios
-      .post('/api/v1/auth/login', data, { withCredentials: true })
+    login(data)
       .then(() => toast.success('Logged in.'))
-      .catch(() => toast.error('Invalid credentials.'))
+      .catch((error) => {
+        toast.error('Something went wrong.');
+        console.log(error);
+      })
       .finally(() => {
         setIsLoading(false);
-        document.location.reload();
       });
   };
 
   return (
-    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
+    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow rounded-lg sm:px-10'>
       <form
-        className='space-y-6'
+        className='space-y-4'
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

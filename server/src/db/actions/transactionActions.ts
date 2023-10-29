@@ -1,6 +1,5 @@
 import { Transaction } from '../schemas/transactions';
 
-// const getTransactions = (id: string) => Transaction.find();
 const getTransactionById = (id: string) => Transaction.findById(id);
 const getTransactionsByCategory = (category: string) => Transaction.find({ category: category });
 const createTransaction = (values: Record<string, any>) =>

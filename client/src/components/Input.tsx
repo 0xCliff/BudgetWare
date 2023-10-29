@@ -1,18 +1,17 @@
 import clsx from 'clsx';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
-interface InputProps {
-  label?: string;
-  id: string;
-  type?: string;
-  required?: boolean;
-  register: UseFormRegister<any>;
-  errors?: FieldErrors;
-  disabled?: boolean;
-  classNames?: string;
-}
-
-const Input: React.FC<InputProps> = ({ label, id, type, required, register, errors, disabled, classNames }) => {
+const Input: React.FC<InputProps> = ({
+  label,
+  id,
+  type,
+  required,
+  register,
+  errors,
+  disabled,
+  classNames,
+  min,
+  step,
+}) => {
   return (
     <div>
       <label
@@ -35,6 +34,8 @@ const Input: React.FC<InputProps> = ({ label, id, type, required, register, erro
             disabled && 'opacity-50 cursor-default',
             classNames
           )}
+          min={min}
+          step={step}
         />
         {errors && errors[id] && <p className='text-sm text-rose-500'>{errors[id]?.message?.toString()}</p>}
       </div>

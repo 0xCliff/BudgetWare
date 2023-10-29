@@ -1,20 +1,22 @@
-import { useContext } from 'react';
+import Skeleton from '../components/Skeleton';
+import { useFetchUserQuery } from '../store';
 
-import { UserContext } from '../context/userContext';
+const Dashboard: React.FC = () => {
+  const { data, error, isFetching } = useFetchUserQuery('');
 
-const Home: React.FC = () => {
-  const user = useContext(UserContext);
+  if (isFetching) {
+    return <Skeleton times={4} />;
+  }
+
+  if (error) {
+    return <div>Error...</div>;
+  }
 
   return (
     <div>
-      Welcome{' '}
-      {user.isLoading ? (
-        '...'
-      ) : (
-        <span className='text-lg text-violet-500 dark:text-violet-400 font-bold'>{user.data.username}</span>
-      )}
+      Welcome <span className='text-lg text-violet-500 dark:text-violet-400 font-bold'>{data?.username}</span>
     </div>
   );
 };
 
-export default Home;
+export default Dashboard;
