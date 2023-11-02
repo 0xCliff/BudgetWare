@@ -7,3 +7,13 @@
       animation-play-state: paused;
     }
 }
+
+@layer components {
+  .dark {
+    @apply bg-gray-900 text-neutral-100 transition-all duration-300
+  }
+  
+  .light {
+    @apply bg-neutral-100 text-gray-900 transition-all duration-300
+  }
+}

@@ -9,7 +9,10 @@ import Input from '../Input';
 import { useLoginMutation } from '../../store';
 
 const loginSchema = z.object({
-  email: z.string().min(1, { message: 'Email is required.' }).email({ message: 'Must be a valid email address' }),
+  email: z
+    .string()
+    .min(1, { message: 'Email is required.' })
+    .email({ message: 'Must be a valid email address' }),
   password: z.string().min(8, { message: 'Password required' }),
 });
 
@@ -41,7 +44,7 @@ const LoginForm: React.FC<AuthFormProps> = ({ toggleVariant }) => {
   };
 
   return (
-    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow rounded-lg sm:px-10'>
+    <div className='bg-white px-6 py-8 shadow rounded-lg sm:px-10'>
       <form
         className='space-y-4'
         onSubmit={handleSubmit(onSubmit)}
@@ -80,7 +83,9 @@ const LoginForm: React.FC<AuthFormProps> = ({ toggleVariant }) => {
             <div className='w-full border-t border-gray-300' />
           </div>
           <div className='relative flex justify-center text-sm'>
-            <span className='dark:bg-neutral-200 bg-white px-2 text-gray-500'>New to budget-app?</span>
+            <span className='bg-white px-2 text-gray-500'>
+              New to budget-app?
+            </span>
           </div>
         </div>
       </div>

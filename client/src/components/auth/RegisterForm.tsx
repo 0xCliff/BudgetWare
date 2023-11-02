@@ -14,8 +14,13 @@ const registerSchema = z
       .string()
       .min(1, { message: 'Username is required.' })
       .max(25, { message: 'Username must be less than 25 charaters' }),
-    email: z.string().min(1, { message: 'Email is required.' }).email({ message: 'Must be a valid email address' }),
-    password: z.string().min(8, { message: 'Password must be greater than 8 chracters.' }),
+    email: z
+      .string()
+      .min(1, { message: 'Email is required.' })
+      .email({ message: 'Must be a valid email address' }),
+    password: z
+      .string()
+      .min(8, { message: 'Password must be greater than 8 chracters.' }),
     confirmPassword: z.string().min(8, { message: 'Please confirm password.' }),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -52,7 +57,7 @@ const RegisterForm: React.FC<AuthFormProps> = ({ toggleVariant }) => {
   };
 
   return (
-    <div className='dark:bg-neutral-200 bg-white px-4 py-8 shadow rounded-lg sm:px-10'>
+    <div className='bg-white px-6 py-8 shadow rounded-lg sm:px-10'>
       <form
         className='space-y-4'
         onSubmit={handleSubmit(onSubmit)}
@@ -112,7 +117,9 @@ const RegisterForm: React.FC<AuthFormProps> = ({ toggleVariant }) => {
             <div className='w-full border-t border-gray-300' />
           </div>
           <div className='relative flex justify-center text-sm'>
-            <span className='dark:bg-neutral-200 bg-white px-2 text-gray-500'>Already have an account?</span>
+            <span className='bg-white px-2 text-gray-500'>
+              Already have an account?
+            </span>
           </div>
         </div>
       </div>

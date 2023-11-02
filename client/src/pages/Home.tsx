@@ -3,6 +3,7 @@ import { useFetchUserQuery } from '../store';
 
 const Dashboard: React.FC = () => {
   const { data, error, isFetching } = useFetchUserQuery('');
+  console.log(data);
 
   if (isFetching) {
     return <Skeleton times={4} />;
@@ -14,7 +15,10 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-      Welcome <span className='text-lg text-violet-500 dark:text-violet-400 font-bold'>{data?.username}</span>
+      Welcome{' '}
+      <span className='text-lg text-violet-500 dark:text-violet-400 font-bold'>
+        {data?.username}
+      </span>
     </div>
   );
 };

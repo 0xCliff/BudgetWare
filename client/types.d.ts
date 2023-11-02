@@ -39,6 +39,7 @@ interface Link {
 }
 
 interface NavProps {
+  close: Dispatch<SetStateAction<boolean>>;
   isOpen: boolean;
   links: Link[];
 }
